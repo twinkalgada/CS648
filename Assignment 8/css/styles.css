@@ -1,0 +1,75 @@
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.row p {
+	width: 100px;
+}
+
+fieldset {
+    margin: 30px 10px;
+    width: 1050px;
+}
+
+input {
+	width: 200px;
+	margin: 5px 0px;
+	border: 1px solid #4f9cda;
+	padding: 8px 0px;
+}
+
+short {
+    padding-left: 8px;
+	color: red;
+}
+
+button {
+	background-color: #4f9cda;
+	color: white;
+	border: none;
+}
+
+.btn_add {
+    width: 75px;
+	padding: 10px 0px;
+	margin: 10px 0px 10px 225px;
+}
+.del-btn {
+	width: 75px;
+    background-color: #4f9cda;	
+    color: white;
+    padding: 6px 20px;
+    border-color: black;
+}
+table {
+	width: 1100px;
+}
+
+thead tr  {
+	background-color: #4f9cda !important;
+	color: white;
+	font-weight: bold;
+}
+
+thead tr td{
+    padding: 10px 5px;
+}
+
+td {
+	width: 100px;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;	
+}
+
+tr:nth-child(even){background-color: #eaf0f8;}
+tr:nth-child(odd){background-color: #d2dff1;}
+
+tr td:nth-of-type(4) {
+	text-align: center;
+}
