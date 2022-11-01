@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery Events</title>
+    <link href="styles/normalize.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+
+    //1
+    createButton(1);
+
+    $("#button1").click(function(){
+        window.alert("You just clicked a button!");
+    });
+
+    //2
+    createButton(2);
+
+    $("#button2").bind("click", function(){
+        window.alert("You just clicked a button!");
+    });
+
+    //3
+    createButton(3);
+
+    $("#button3").on("click", function(){
+        window.alert("You just clicked a button!")
+    });
+
+    //4
+    createButton(4);
+    createButton(5);
+
+    $("#button5, #button4").on("click", function(){
+        window.alert("You just clicked a button!")
+    });
+
+    function createButton(button) {
+            $("body").append(`<button id=\'button${button}'\> Button ${button}</button><br/>`)
+            $(`#button-${button}`).css("margin", "10px 0 10px 0");
+    }
+
+    //5
+    let div = document.createElement("div");
+    div.setAttribute("id","div_css");
+    $("body").append(div);
+    $("#div_css").css({
+            "width": "400px",
+            "height": "400px",
+            "background-color": "pink",
+        })
+
+
+
+    //6
+
+    let span = document.createElement("span") 
+    span.setAttribute('id','span')
+    span.textContent = "Span Added!"
+    $("body").append(span);
+
+
+    $("#div_css").on({
+        mouseenter: function() {
+            alert("Mouse entered the div!");
+            $("#span").text("Mouse entered the div!");
+        },
+        mouseleave: function() {
+            alert("Mouse left the div!");
+            $("#span").text("Mouse left the div!");
+        },
+        click: function() {
+            alert("You just clicked inside the div!");
+            $("#span").text("You just clicked inside the div!");
+        }
+    });
+
+
+    //7
+    let link = document.createElement("a")
+    link.setAttribute("href","https://www.modulemedia.com") 
+    link.setAttribute("id","media_link") 
+    link.textContent = "Module Media"
+    $("body").append(link,"<br><br>")
+    $("#media_link").on('click', (event) => {
+            event.preventDefault();
+            $("#media_link").css("color", "red");
+            alert(event.target);
+    });
+
+    //8
+
+    let div_window_size = document.createElement("div")
+    div_window_size.setAttribute("id","window_size")
+    div_window_size.innerHTML = `Width : ${$(window).width()}px <br/> Height : ${$(window).height()}px`
+
+    $("body").append(div_window_size,"<br><br>")
+
+    $(window).resize(function () {
+        $("#window_size").text(`Width: ${$(window).width()} Height: ${$(window).height()}`)
+    })  
+
+    //9
+
+    let textfield = document.createElement("input")
+    textfield.setAttribute('id',"focus")
+    $("body").append(textfield,"<br/><br/>")
+
+    $("#focus").focusin(() => {
+        $("#focus").css("background", "#EDEDED");
+    })
+
+    $("#focus").focusout(() => {
+        $("#focus").css("background", "#FFFFFF");
+    })
+
+    //10
+
+    let form = document.createElement("form")
+    form.setAttribute("id","form")
+
+    let nameInput = document.createElement("input")
+    nameInput.setAttribute('id','name')
+    nameInput.placeholder = "Name"
+    nameInput.setAttribute('style','display:block;margin-top: 20px')
+
+    form.appendChild(nameInput)
+
+    let emailInput = document.createElement("input")
+    emailInput.setAttribute('id','email')
+    emailInput.placeholder = "Email"
+    emailInput.setAttribute('style','display:block; margin-top: 20px')
+
+    form.appendChild(emailInput)
+
+    let submit = document.createElement("button")
+    submit.textContent = "Submit"
+    submit.setAttribute('id','submit')
+    submit.setAttribute('style','display:block;margin-top: 20px')
+
+    form.appendChild(submit)
+    $("body").append(form,"<br><br>")
+
+    $("#form").on("submit",(event)=>{
+            event.preventDefault();
+            let error_css = {
+                "border" : "2px solid red"
+            } , success_css = {
+                "border" : "2px solid green"
+            }
+        
+            var validInput = true
+            var errorMessage = ""
+            
+            for(let input of [$("#name"),$("#email")]){
+                if(input.val() == "")
+                {
+                    validInput = false
+                    input.css(error_css)
+                    errorMessage += ` Please enter ${input.attr('placeholder')} \n`
+                }else{
+                    input.css(success_css)
+                }
+                
+                if(validInput == false)
+                    window.alert(errorMessage)
+            }
+        })
+    });   
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
